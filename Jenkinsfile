@@ -24,7 +24,7 @@ pipeline {
 
                
                 sh '''
-                    git checkout: 'gh-pages', credentialsId: 'c391c726-fb09-4c59-88ff-4216e34c8f8c', url: 'https://github.com/honeyy02/Jenkins.git'
+                    git checkout 'gh-pages', credentialsId: 'c391c726-fb09-4c59-88ff-4216e34c8f8c', url: 'https://github.com/honeyy02/Jenkins.git'
                     cd gh-pages
                     cp ../index.html .
                     git add .
