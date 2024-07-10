@@ -21,8 +21,10 @@ pipeline {
             // Set up Git credentials
             withCredentials([usernamePassword(credentialsId: 'c391c726-fb09-4c59-88ff-4216e34c8f8c', usernameVariable: 'honeyy02', passwordVariable: 'Honey@2402')]) {
                 // Clone the repository's gh-pages branch
+
+                 def encodedPassword = URLEncoder.encode(env.Honey@2402, 'UTF-8').replace('+', '%20')
                 sh '''
-                    git clone --branch=gh-pages https://$honeyy02:$Honey@2402@github.com/honeyy02/Jenkins.git gh-pages
+                    git clone --branch=gh-pages https://$honeyy02:$encodedPassword@github.com/honeyy02/Jenkins.git gh-pages
                     cd gh-pages
                     cp ../index.html .
                     git add .
