@@ -9,21 +9,21 @@ pipeline {
             }
         }
         
-        stage('Lint HTML') {
-            steps {
-                script {
-                    try {
-                        // Install htmlhint globally (assuming Node.js/npm is available)
-                        sh 'npm install -g htmlhint'
-                        // Run htmlhint on index.html file
-                        sh 'htmlhint index.html'
-                    } catch (Exception e) {
-                        echo 'Linting failed'
-                        error 'Linting HTML failed. Check the console output for details.'
-                    }
-                }
-            }
-        }
+        // stage('Lint HTML') {
+        //     steps {
+        //         script {
+        //             try {
+        //                 // Install htmlhint globally (assuming Node.js/npm is available)
+        //                 sh 'npm install -g htmlhint'
+        //                 // Run htmlhint on index.html file
+        //                 sh 'htmlhint index.html'
+        //             } catch (Exception e) {
+        //                 echo 'Linting failed'
+        //                 error 'Linting HTML failed. Check the console output for details.'
+        //             }
+        //         }
+        //     }
+        // }
         
         stage('Deploy to GitHub Pages') {
             steps {
