@@ -11,10 +11,17 @@ pipeline {
         
         stage('Lint HTML') {
             steps {
-                // Install htmlhint globally (assuming Node.js/npm is available)
-                sh 'npm install -g htmlhint'
-                // Run htmlhint on index.html file
-                sh 'htmlhint index.html'
+                script {
+                    try {
+                        // Install htmlhint globally (assuming Node.js/npm is available)
+                        sh 'npm install -g htmlhint'
+                        // Run htmlhint on index.html file
+                        sh 'htmlhint index.html'
+                    } catch (Exception e) {
+                        echo 'Linting failed'
+                        error 'Linting HTML failed. Check the console output for details.'
+                    }
+                }
             }
         }
         
