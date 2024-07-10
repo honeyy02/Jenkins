@@ -5,7 +5,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Checkout code from Git repository
-                git branch: 'main', url: 'https://github.com/honeyy02/Jenkins.git'
+                git branch: 'main', credentialsId: 'c391c726-fb09-4c59-88ff-4216e34c8f8c', url: 'https://github.com/honeyy02/Jenkins.git', tool: 'Git'
             }
         }
         
