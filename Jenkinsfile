@@ -5,7 +5,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Checkout code from Git repository
-                git 'https://github.com/honeyy02/Jenkins.git'
+                git branch: 'main', url: 'https://github.com/honeyy02/Jenkins.git'
             }
         }
         
@@ -26,17 +26,14 @@ pipeline {
                     
                     // Set up Git credentials (GitHub SSH key or username/password)
                     withCredentials([usernamePassword(credentialsId: 'c391c726-fb09-4c59-88ff-4216e34c8f8c', usernameVariable: 'honeyy02', passwordVariable: 'Honey@2402')]) {
-                        // Clone the repository (assuming the 'gh-pages' branch exists)
-                        git credentialsId: 'c391c726-fb09-4c59-88ff-4216e34c8f8c', url: 'https://github.com/honeyy02/Jenkins.git', branch: 'gh-pages'
-                        
-                        // Copy the built artifact to the repository
-                        sh 'cp -r index.html ./'
-                        
-                        // Commit and push changes to GitHub Pages
+                        // Clone the repository's gh-pages branch
                         sh '''
-                            git config --global user.email "honeysharma0224@gmail.com"
-                            git config --global user.name "honeyy02"
+                            git clone --branch=gh-pages https://$honeyy02:$Honey@2402@github.com/honeyy02/Jenkins.git gh-pages
+                            cd gh-pages
+                            cp ../index.html .
                             git add .
+                            git config user.email "honeysharma0224@gmail.com"
+                            git config user.name "honeyy02"
                             git commit -m "Deploying index.html to GitHub Pages"
                             git push
                         '''
